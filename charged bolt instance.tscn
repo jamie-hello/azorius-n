@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://charged bolt instance.gd" type="Script" id=1]
+[ext_resource path="res://chargedboltangle.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 1, 0.537255, 0, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+material = SubResource( 2 )
+
+[sub_resource type="BoxShape" id=4]
+
+[node name="charged bolt instance" type="KinematicBody" groups=["damaging"]]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0219529, 0 )
+shape = SubResource( 4 )
+
+[node name="deletion timeout" type="Timer" parent="."]
+wait_time = 9.114
+autostart = true
+
+[node name="change angle timer" type="Timer" parent="."]
+wait_time = 0.051
+autostart = true
+script = ExtResource( 2 )
+
+[connection signal="timeout" from="deletion timeout" to="." method="_on_deletion_timeout_timeout"]
+[connection signal="timeout" from="change angle timer" to="." method="_on_change_angle_timer_timeout"]
+[connection signal="timeout" from="change angle timer" to="change angle timer" method="_on_change_angle_timer_timeout"]

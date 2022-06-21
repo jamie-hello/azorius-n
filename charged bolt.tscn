@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://chargedboltdashtimer.gd" type="Script" id=1]
+[ext_resource path="res://charged bolt.gd" type="Script" id=2]
+
+[node name="charged bolt" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="charged bolt instance" parent="." instance_placeholder="res://charged bolt instance.tscn"]
+
+[node name="dash timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+script = ExtResource( 1 )
+
+[node name="pretimer" type="Timer" parent="dash timer"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="dash timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash timer" to="dash timer" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash timer/pretimer" to="." method="_on_pretimer_timeout"]
+[connection signal="timeout" from="dash timer/pretimer" to="dash timer" method="_on_pretimer_timeout"]
