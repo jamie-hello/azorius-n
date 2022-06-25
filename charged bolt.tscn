@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://chargedboltdashtimer.gd" type="Script" id=1]
 [ext_resource path="res://charged bolt.gd" type="Script" id=2]
+[ext_resource path="res://power rangers lightnigng bolt.png" type="Texture" id=3]
+[ext_resource path="res://chargedbolticon.gd" type="Script" id=4]
+[ext_resource path="res://texturecooldown.png" type="Texture" id=5]
 
 [node name="charged bolt" type="Spatial"]
 script = ExtResource( 2 )
@@ -17,7 +20,34 @@ script = ExtResource( 1 )
 wait_time = 0.1
 one_shot = true
 
+[node name="Control" type="Control" parent="."]
+margin_right = -1025.0
+margin_bottom = -603.0
+script = ExtResource( 4 )
+
+[node name="PowerRangersLightnigngBolt" type="Sprite" parent="Control"]
+position = Vector2( 832.188, 532.625 )
+scale = Vector2( 0.0205677, 0.0209396 )
+texture = ExtResource( 3 )
+
+[node name="cooldown" type="Timer" parent="Control"]
+wait_time = 2.0
+one_shot = true
+
+[node name="TextureProgress" type="TextureProgress" parent="Control"]
+margin_left = 792.0
+margin_top = 492.0
+margin_right = 992.0
+margin_bottom = 692.0
+texture_progress = ExtResource( 5 )
+fill_mode = 4
+tint_under = Color( 1, 1, 1, 0 )
+tint_over = Color( 1, 1, 1, 0 )
+tint_progress = Color( 0.184314, 1, 0, 1 )
+
 [connection signal="timeout" from="dash timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash timer" to="dash timer" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash timer/pretimer" to="." method="_on_pretimer_timeout"]
 [connection signal="timeout" from="dash timer/pretimer" to="dash timer" method="_on_pretimer_timeout"]
+[connection signal="timeout" from="Control/cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Control/cooldown" to="Control" method="_on_cooldown_timeout"]

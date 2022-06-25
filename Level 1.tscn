@@ -32,6 +32,7 @@ visible = false
 
 [node name="CollisionShape" type="CollisionShape" parent="The Floor2"]
 shape = SubResource( 1 )
+disabled = true
 
 [node name="MeshInstance" type="MeshInstance" parent="The Floor2"]
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
@@ -44,7 +45,7 @@ shadow_enabled = true
 directional_shadow_max_distance = 128.1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4415, 4.07762, -1.04594 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44956, 20.8877, 2.56566 )
 
 [node name="enemy" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.58883, 1.90626, 0 )

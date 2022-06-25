@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://frozenorb instance.tscn" type="PackedScene" id=1]
+
+[node name="frozenorb" type="Spatial"]
+
+[node name="frozenorb instance" parent="." instance=ExtResource( 1 )]
