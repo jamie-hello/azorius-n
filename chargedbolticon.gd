@@ -15,7 +15,7 @@ func _ready():
 	pass # Replace with function body.
 
 
-func _process(delta):
+func _process(_delta):
 	if !cooldown.is_stopped():
 		textureprogress.value = float(cooldown.get_time_left()/howlongisthecooldown * 100)
 
