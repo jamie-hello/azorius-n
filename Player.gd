@@ -4,7 +4,7 @@ extends KinematicBody
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var speed = 600
+var speed = 10
 var _velocity = Vector3.ZERO
 var cameraheight = 30
 var input_interrupted = false #if a monster pushed you back or if you are dashing
@@ -13,19 +13,27 @@ onready var cameraArms_y = $"CameraArms/SpringArm leftright/SpringArm updown"
 onready var camera = $"CameraArms/SpringArm leftright/SpringArm updown/Camera"
 onready var spell = $"charged bolt"
 onready var spell2 = $"default spell"
+onready var fps_label = $fps_label
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	#Engine.time_scale = 1
+	pass
 
-func _process(_delta) -> void:
+func _process(delta) -> void:
+	
+	
+	fps_label.set_text(str(Engine.get_frames_per_second() , " " , str(OS.get_ticks_msec()) , " " , str(delta)))
+	
 	_velocity.y = 0
 	if !input_interrupted:
 		_velocity.x = (Input.get_action_strength("left") - Input.get_action_raw_strength("right")) 
 		_velocity.z = (Input.get_action_strength("up") - Input.get_action_raw_strength("down")) 
-	_velocity = _velocity.normalized() * speed * _delta
-	_velocity.y = -800 * _delta
-	move_and_slide(_velocity, Vector3.UP,false)
+	_velocity = _velocity.normalized() * speed
+	_velocity.y = -14
+	#move_and_slide(_velocity, Vector3.UP,true)
+	move_and_slide_with_snap(_velocity,Vector3.DOWN,Vector3.UP,true)
 	
 	"""
 	#i need to control the camera arms every process frame
@@ -52,9 +60,6 @@ func _input(event):
 		spell2.spell_use()
 	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 
@@ -66,8 +71,8 @@ func _on_charged_bolt_preparedashing():
 func _on_charged_bolt_dashing(angle):
 	input_interrupted = true
 	_velocity = angle
-	speed = 4000
+	speed = 67
 func _on_charged_bolt_enddashing():
 	_velocity = Vector3.ZERO
 	input_interrupted = false
-	speed = 600
+	speed = 10

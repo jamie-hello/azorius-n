@@ -10,12 +10,18 @@ onready var icon = $PowerRangersLightnigngBolt
 onready var textureprogress = $TextureProgress
 var howlongisthecooldown = 2 #if u change this make sure to change it in the charged bolt script too
 
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	pass # Replace with function body.
 
 
 func _process(_delta):
+	
+	
 	if !cooldown.is_stopped():
 		textureprogress.value = float(cooldown.get_time_left()/howlongisthecooldown * 100)
 

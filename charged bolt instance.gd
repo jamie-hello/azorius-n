@@ -14,13 +14,13 @@ bolt instance scene
 
 var _damage = 1
 var _angle = Vector3.ZERO
-var speed = 780
+var speed = 13
 var anglebias = 0
 const eightydegrees = 1.39626
 
 func initialize(damage : int, angle : Vector3):
 	_damage = damage
-	_angle = angle.normalized() * speed
+	_angle = angle.normalized() * speed 
 	anglebias = Vector2(_angle.x,_angle.z).angle()
 	pass
 
@@ -32,7 +32,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	move_and_slide(_angle * _delta,Vector3.UP)
+	move_and_slide(_angle,Vector3.UP)
 #	pass
 
 
