@@ -28,8 +28,10 @@ func _process(delta):
 """
 
 func _on_Area_body_entered(body):
-	print("ive been hit")
-	body.queue_free()
+	if body.is_in_group("damaging"):
+		
+		print("ive been hit")
+		body.queue_free()
 #	damagetakencolortimer.start
 	
 	

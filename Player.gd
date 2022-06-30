@@ -5,6 +5,7 @@ extends KinematicBody
 # var a = 2
 # var b = "text"
 var speed = 10
+var basespeed = 10
 var _velocity = Vector3.ZERO
 var cameraheight = 30
 var input_interrupted = false #if a monster pushed you back or if you are dashing
@@ -12,7 +13,8 @@ onready var cameraArms_xz : SpringArm = $"CameraArms/SpringArm leftright"
 onready var cameraArms_y = $"CameraArms/SpringArm leftright/SpringArm updown"
 onready var camera = $"CameraArms/SpringArm leftright/SpringArm updown/Camera"
 onready var spell = $"charged bolt"
-onready var spell2 = $"default spell"
+#onready var spell2 = $"default spell"
+onready var spell2 = $"frozenorb"
 onready var fps_label = $fps_label
 
 
@@ -54,10 +56,11 @@ func _process(delta) -> void:
 	"""
 	
 func _input(event):
-	if event.is_action_pressed("use spell"):
-		spell.spell_use()
-	elif event.is_action_pressed("use spell 2"):
-		spell2.spell_use()
+	if !input_interrupted:
+		if event.is_action_pressed("use spell"):
+			spell.spell_use()
+		elif event.is_action_pressed("use spell 2"):
+			spell2.spell_use()
 	
 
 
@@ -75,4 +78,17 @@ func _on_charged_bolt_dashing(angle):
 func _on_charged_bolt_enddashing():
 	_velocity = Vector3.ZERO
 	input_interrupted = false
-	speed = 10
+	speed = basespeed
+
+
+func _on_frozenorb_preparepushback():
+	input_interrupted = true
+	_velocity = Vector3.ZERO
+func _on_frozenorb_pushbacking(angle):
+	input_interrupted = true
+	_velocity = angle
+	speed = 21
+func _on_frozenorb_endpushback():
+	_velocity = Vector3.ZERO
+	input_interrupted = false
+	speed = basespeed

@@ -46,7 +46,7 @@ directional_shadow_max_distance = 128.1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44956, 20.8877, 2.56566 )
 
 [node name="enemy" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.58883, 1.90626, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.58883, 1.09988, 0 )
 
 [node name="The Floor3" type="StaticBody" parent="."]
 transform = Transform( 0.926897, -0.375318, 0, 0.375318, 0.926897, 0, 0, 0, 1, -30.658, 5.88057, 0.618885 )

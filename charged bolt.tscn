@@ -45,10 +45,6 @@ tint_under = Color( 1, 1, 1, 0 )
 tint_over = Color( 1, 1, 1, 0 )
 tint_progress = Color( 0.184314, 1, 0, 1 )
 
-[node name="fps_label" type="Label" parent="Control"]
-margin_right = 173.0
-margin_bottom = 140.0
-
 [connection signal="timeout" from="dash timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash timer" to="dash timer" method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash timer/pretimer" to="." method="_on_pretimer_timeout"]
