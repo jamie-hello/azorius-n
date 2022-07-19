@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://charged bolt.tscn" type="PackedScene" id=4]
 [ext_resource path="res://towerRound_sampleE.glb" type="PackedScene" id=5]
 [ext_resource path="res://frozenorb.tscn" type="PackedScene" id=6]
+[ext_resource path="res://vortex.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.784926
@@ -29,18 +30,23 @@ visible = false
 
 [node name="frozenorb" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26253, 0 )
-visible = false
 
 [node name="towermodel" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1.5, 0, 0, 0, 3, 0, 0, 0, 1.5, 0, 0, 0 )
 collision_layer = 0
 collision_mask = 0
 
+[node name="vortex" parent="." instance=ExtResource( 7 )]
+visible = false
+
 [node name="fps_label" type="Label" parent="."]
 margin_left = 12.0
 margin_top = 17.0
 margin_right = 133.0
 margin_bottom = 121.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="dashing" from="charged bolt" to="." method="_on_charged_bolt_dashing"]
 [connection signal="enddashing" from="charged bolt" to="." method="_on_charged_bolt_enddashing"]
@@ -48,3 +54,6 @@ margin_bottom = 121.0
 [connection signal="endpushback" from="frozenorb" to="." method="_on_frozenorb_endpushback"]
 [connection signal="preparepushback" from="frozenorb" to="." method="_on_frozenorb_preparepushback"]
 [connection signal="pushbacking" from="frozenorb" to="." method="_on_frozenorb_pushbacking"]
+[connection signal="vortexendinputoverride" from="vortex" to="." method="_on_vortex_vortexendinputoverride"]
+[connection signal="vortexinputoverride" from="vortex" to="." method="_on_vortex_vortexinputoverride"]
+[connection signal="vortexpretimer" from="vortex" to="." method="_on_vortex_vortexpretimer"]

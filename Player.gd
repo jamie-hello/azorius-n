@@ -9,12 +9,14 @@ var basespeed = 10
 var _velocity = Vector3.ZERO
 var cameraheight = 30
 var input_interrupted = false #if a monster pushed you back or if you are dashing
+onready var vortexpivot = preload("res://vortexpivot.tscn")
 onready var cameraArms_xz : SpringArm = $"CameraArms/SpringArm leftright"
 onready var cameraArms_y = $"CameraArms/SpringArm leftright/SpringArm updown"
 onready var camera = $"CameraArms/SpringArm leftright/SpringArm updown/Camera"
 onready var spell = $"charged bolt"
 #onready var spell2 = $"default spell"
 onready var spell2 = $"frozenorb"
+onready var spell3 = $"vortex"
 onready var fps_label = $fps_label
 
 
@@ -26,7 +28,8 @@ func _ready():
 func _process(delta) -> void:
 	
 	
-	fps_label.set_text(str(Engine.get_frames_per_second() , " " , str(OS.get_ticks_msec()) , " " , str(delta)))
+	fps_label.set_text(str(Engine.get_frames_per_second() , " " , str(OS.get_ticks_msec()) , " " , str(delta), " ", 
+	str(self.get_transform())))
 	
 	_velocity.y = 0
 	if !input_interrupted:
@@ -61,13 +64,16 @@ func _input(event):
 			spell.spell_use()
 		elif event.is_action_pressed("use spell 2"):
 			spell2.spell_use()
+		elif event.is_action_pressed("use spell 3"):
+			spell3.spell_use()
+			pass
 	
 
 
 
 
 
-
+#charged bolt
 func _on_charged_bolt_preparedashing():
 	input_interrupted = true
 	_velocity = Vector3.ZERO
@@ -81,6 +87,7 @@ func _on_charged_bolt_enddashing():
 	speed = basespeed
 
 
+#frozen orb
 func _on_frozenorb_preparepushback():
 	input_interrupted = true
 	_velocity = Vector3.ZERO
@@ -92,3 +99,41 @@ func _on_frozenorb_endpushback():
 	_velocity = Vector3.ZERO
 	input_interrupted = false
 	speed = basespeed
+
+
+#vortex
+var vortexpivotinstance
+var vortexcollisionshape
+var vortexpivotcameraarms
+var vortexpivottowermodel
+func _on_vortex_vortexpretimer(): #stop input and stay still and play the animation
+	input_interrupted = true
+	_velocity = Vector3.ZERO
+func _on_vortex_vortexinputoverride(rotation_axis_at_center_of_vortex,direction):
+	#i think i need to assign colliosion cameraarms towermodel to a dummy node
+	#then rotate the dummy node
+	#then on vortexendinputoverride i will update the real position and remove the dummy node
+	vortexpivotinstance = vortexpivot.instance()
+	vortexpivotinstance.set_translation(rotation_axis_at_center_of_vortex)
+	vortexcollisionshape = $"CollisionShape"
+	#vortexpivotcameraarms = $"CameraArms"
+	vortexpivottowermodel = $"towermodel"
+	remove_child(vortexcollisionshape)
+	#remove_child(vortexpivotcameraarms)
+	remove_child(vortexpivottowermodel)
+	vortexpivotinstance.add_child(vortexcollisionshape)
+	#vortexpivotinstance.add_child(vortexpivotcameraarms)
+	vortexpivotinstance.add_child(vortexpivottowermodel)
+	vortexpivotinstance.set_direction(direction)
+	print(str(vortexcollisionshape))
+	#the dummy node vortexpivot has a script that automatically rotates
+func _on_vortex_vortexendinputoverride():
+	vortexpivotinstance.remove_child(vortexcollisionshape)
+	#vortexpivotinstance.remove_child(vortexpivotcameraarms)
+	vortexpivotinstance.remove_child(vortexpivottowermodel)
+	add_child(vortexcollisionshape)
+	#add_child(vortexpivotcameraarms)
+	add_child(vortexpivottowermodel)
+	vortexpivotinstance.queue_free()
+	input_interrupted = false
+	_velocity = Vector3.ZERO

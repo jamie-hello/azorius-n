@@ -1,13 +1,12 @@
 extends Spatial
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
 onready var instance = preload("res://frozenorb instance.tscn")
 onready var cooldowntimer = $"Control/cooldown"
 onready var pretimer = $pretimer
 onready var pushbacktimer = $pushbacktimer
+onready var particles = $Particles
 var on_cooldown = false
 var cooldowntime = 2.5 #if u change this make sure to change it in the control script too
 var angle = Vector3.ZERO
@@ -20,7 +19,7 @@ var damage = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	particles.emitting = false
 
 func spell_use():
 	if !on_cooldown:
@@ -36,6 +35,7 @@ func spell_use():
 		on_cooldown = true
 		cooldowntimer.start(cooldowntime)
 		pretimer.start()
+		particles.emitting = true
 		emit_signal("preparepushback")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,6 +49,7 @@ func _on_cooldown_timeout():
 
 func _on_pretimer_timeout():
 	pushbacktimer.start()
+	particles.emitting = false
 	emit_signal("pushbacking",-angle)
 	var newcast = instance.instance()
 	newcast.initialize(damage,angle)

@@ -6,17 +6,14 @@ extends Control
 # var b = "text"
 
 onready var cooldown = $cooldown
-onready var icon = $frozenorbicon
+onready var icon = $Sprite
 onready var textureprogress = $TextureProgress
-var howlongisthecooldown = 2.5 #if u change this make sure to change it in the frozen orb script too
+var howlongisthecooldown = 2.7 #if u change this make sure to change it in the vortex script too and also -.2 active frames timer
 
 
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	
-	pass # Replace with function body.
+
 
 
 func _process(_delta):

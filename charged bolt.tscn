@@ -44,6 +44,9 @@ fill_mode = 4
 tint_under = Color( 1, 1, 1, 0 )
 tint_over = Color( 1, 1, 1, 0 )
 tint_progress = Color( 0.184314, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="dash timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash timer" to="dash timer" method="_on_dash_timer_timeout"]

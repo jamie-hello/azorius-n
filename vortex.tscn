@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://vortex instance.tscn" type="PackedScene" id=1]
+[ext_resource path="res://texturecooldown.png" type="Texture" id=2]
+[ext_resource path="res://vortexicon.png" type="Texture" id=3]
+[ext_resource path="res://vortexcontrol.gd" type="Script" id=4]
+[ext_resource path="res://vortex.gd" type="Script" id=5]
+
+[node name="vortex" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="vortex instance" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.897, 0, 0 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Control"]
+position = Vector2( 683, 530 )
+scale = Vector2( 0.615, 0.63 )
+texture = ExtResource( 3 )
+
+[node name="cooldown" type="Timer" parent="Control"]
+wait_time = 2.5
+one_shot = true
+
+[node name="TextureProgress" type="TextureProgress" parent="Control"]
+margin_left = 646.0
+margin_top = 490.0
+margin_right = 726.0
+margin_bottom = 570.0
+texture_progress = ExtResource( 2 )
+fill_mode = 4
+tint_under = Color( 1, 1, 1, 0 )
+tint_over = Color( 1, 1, 1, 0 )
+tint_progress = Color( 0.184314, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="plopped" from="vortex instance" to="." method="_on_vortex_instance_plopped"]
+[connection signal="timeout" from="Control/cooldown" to="Control" method="_on_cooldown_timeout"]

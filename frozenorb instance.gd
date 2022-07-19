@@ -1,9 +1,6 @@
 extends KinematicBody
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
 onready var instance = preload("res://frozen orb shard instance.tscn")
 onready var placer = $"frozen orb shard instance"

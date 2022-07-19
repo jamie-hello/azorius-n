@@ -1,0 +1,298 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://abstract-wormhole-black-hole-spiral-space-with-gas-dust-galaxy-stars_39386-430.jpg" type="Texture" id=1]
+[ext_resource path="res://effect_4.png" type="Texture" id=2]
+[ext_resource path="res://wormholenromal.jpg" type="Texture" id=3]
+[ext_resource path="res://vortex instance.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=9]
+resource_name = "New Anim"
+tracks/0/type = "transform"
+tracks/0/path = NodePath("MeshInstance")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("MeshInstance:rotation_degrees:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("MeshInstance:rotation_degrees:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("MeshInstance:rotation_degrees:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 90, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("MeshInstance:translation:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("MeshInstance:translation:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("MeshInstance:translation:z")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath(".:scale:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath(".:scale:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath(".:scale:z")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3 )
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("MeshInstance:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("MeshInstance:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("MeshInstance:translation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("MeshInstance:rotation_degrees:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("MeshInstance:rotation_degrees:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("MeshInstance:rotation_degrees:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath(".:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath(".:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath(".:scale:z")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="CylinderShape" id=1]
+height = 1.52291
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_cull_mode = 2
+albedo_color = Color( 0.862745, 1, 0.937255, 1 )
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 230.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.6
+
+[sub_resource type="QuadMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_cull_mode = 2
+albedo_color = Color( 0.588235, 0.556863, 1, 1 )
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 1 )
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )
+uv1_scale = Vector3( 2, 2, 1 )
+
+[sub_resource type="CylinderMesh" id=3]
+material = SubResource( 4 )
+height = 0.182
+
+[node name="vortex instance" type="KinematicBody"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="plop" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+method_call_mode = 1
+"anims/New Anim" = SubResource( 9 )
+anims/RESET = SubResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.672414, 0 )
+visible = false
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0.115, 0 )
+material_override = SubResource( 5 )
+cast_shadow = 0
+amount = 1
+lifetime = 10.0
+visibility_aabb = AABB( -0.001, -0.001, -0.001, 0.002, 0.002, 0.002 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
+
+[node name="Particles2" type="Particles" parent="."]
+transform = Transform( 0.891608, 0.452808, -5.93786e-08, 0, 1.31134e-07, 1, 0.452808, -0.891608, 1.1692e-07, 0, 0.114807, 0 )
+material_override = SubResource( 8 )
+cast_shadow = 0
+amount = 1
+lifetime = 10.0
+visibility_aabb = AABB( -0.001, -0.001, -0.001, 0.002, 0.002, 0.002 )
+process_material = SubResource( 6 )
+draw_pass_1 = SubResource( 7 )
+
+[node name="deletion timer" type="Timer" parent="."]
+wait_time = 2.7
+autostart = true
+
+[node name="damage pulse" type="Timer" parent="."]
+wait_time = 0.34
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="ploptimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="deletion timer" to="." method="_on_deletion_timer_timeout"]
+[connection signal="timeout" from="damage pulse" to="." method="_on_damage_pulse_timeout"]
+[connection signal="timeout" from="ploptimer" to="." method="_on_ploptimer_timeout"]
