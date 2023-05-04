@@ -16,7 +16,7 @@ onready var camera = $"CameraArms/SpringArm leftright/SpringArm updown/Camera"
 onready var spell = $"charged bolt"
 #onready var spell2 = $"default spell"
 onready var spell2 = $"frozenorb"
-onready var spell3 = $"vortex"
+#onready var spell3 = $"vortex"
 onready var fps_label = $fps_label
 
 
@@ -38,6 +38,9 @@ func _process(delta) -> void:
 	_velocity = _velocity.normalized() * speed
 	_velocity.y = -14
 	#move_and_slide(_velocity, Vector3.UP,true)
+	#move_and_slide_with_snap(_velocity,Vector3.DOWN,Vector3.UP,true)
+	
+func _physics_process(delta):
 	move_and_slide_with_snap(_velocity,Vector3.DOWN,Vector3.UP,true)
 	
 	"""
@@ -65,8 +68,10 @@ func _input(event):
 		elif event.is_action_pressed("use spell 2"):
 			spell2.spell_use()
 		elif event.is_action_pressed("use spell 3"):
-			spell3.spell_use()
+			#spell3.spell_use()
 			pass
+		elif event.is_action_pressed("ui_cancel"):
+			get_tree().quit()
 	
 
 
@@ -137,3 +142,10 @@ func _on_vortex_vortexendinputoverride():
 	vortexpivotinstance.queue_free()
 	input_interrupted = false
 	_velocity = Vector3.ZERO
+
+
+signal sendmyposition
+func _on_ChainChomp_sendmeplayerposition():
+	#for chainchomp looking and dashing toward the player
+	emit_signal("sendmyposition",self.get_translation())
+	pass # Replace with function body.

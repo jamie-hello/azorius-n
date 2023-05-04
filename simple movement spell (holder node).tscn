@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://simple movement spell (holder node).gd" type="Script" id=1]
+
+[node name="simple movement spell (holder node)" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="winding up" type="Timer" parent="."]
+one_shot = true
+
+[node name="done winding" type="Timer" parent="."]
+wait_time = 0.329
+one_shot = true
+
+[node name="length of dash" type="Timer" parent="."]
+wait_time = 0.39
+one_shot = true
+
+[node name="total cooldown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="winding up" to="." method="_on_winding_up_timeout"]
+[connection signal="timeout" from="done winding" to="." method="_on_done_winding_timeout"]
+[connection signal="timeout" from="length of dash" to="." method="_on_length_of_dash_timeout"]
+[connection signal="timeout" from="total cooldown" to="." method="_on_total_cooldown_timeout"]

@@ -22,10 +22,10 @@ func _process(_delta):
 	#print("springarmdest is ",springarmdestx,", ",springarmdesty)
 	var springarmxz = Vector2(springarmdesty, springarmdestx)
 	xz.set_rotation(Vector3(0,-springarmxz.angle(),0))
-	xz.set_length(springarmxz.length() * 50)
+	xz.set_length(springarmxz.length() * 40)
 	#print("cameraArmxz length is ",springarmxz.length()," and angle is ",springarmxz.angle())
 	
-	y.set_length(30)
+	y.set_length(35)
 	#i need to set cameraArms to collision mask 2 or something to noclip into walls
 	
 	

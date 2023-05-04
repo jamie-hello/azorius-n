@@ -21,7 +21,7 @@ func _ready():
 
 func _on_pretimer_timeout():
 	start(waittime)
-	print("starting dash timer for ",waittime)
+	#print("starting dash timer for ",waittime)
 	
 
 

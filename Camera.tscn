@@ -13,3 +13,4 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0
 collision_mask = 0
 
 [node name="Camera" type="Camera" parent="SpringArm leftright/SpringArm updown"]
+far = 200.0
