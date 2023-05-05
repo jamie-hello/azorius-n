@@ -45,9 +45,9 @@ func _input(event):
 		if cooldownready:
 			cooldownready = false
 			print("im gonna use my spell!!!! first i'll wind up! im looking at the player now!")
-			cooldown.set_wait_time(2)
+			cooldown.set_wait_time(2.2)
 			cooldown.start()
-			windingtimer.set_wait_time(1)
+			windingtimer.set_wait_time(1.2)
 			windingtimer.start()
 			emit_signal("winding_up")
 			
