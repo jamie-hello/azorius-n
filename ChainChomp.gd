@@ -5,9 +5,14 @@ extends KinematicBody
 var spell1 = ""
 var _velocity = Vector3.ZERO
 var speed = 0
+var hp = 5000
+onready var enemyscriptstuff = $"KinematicBody"
+onready var hpprogress = $"KinematicBody/Sprite3D/Viewport/ProgressBar"
 signal sendmeplayerposition
 
 func _ready():
+	hpprogress.max_value = hp
+	hpprogress.value = hp
 	pass 
 	
 func _physics_process(delta):
