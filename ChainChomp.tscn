@@ -8,7 +8,7 @@
 [ext_resource path="res://Nintendo 64 - Super Mario 64 - Chain Chomp/VMtl038.material" type="Material" id=6]
 [ext_resource path="res://Nintendo 64 - Super Mario 64 - Chain Chomp/VMtl036.material" type="Material" id=7]
 [ext_resource path="res://Nintendo 64 - Super Mario 64 - Chain Chomp/VMtl040.material" type="Material" id=8]
-[ext_resource path="res://hpbar.tres" type="Theme" id=9]
+[ext_resource path="res://make a dude spell.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {
@@ -109,24 +109,10 @@ shape = SubResource( 2 )
 [node name="damagetakencolortimer" type="Timer" parent="KinematicBody"]
 wait_time = 0.278
 
-[node name="Sprite3D" type="Sprite3D" parent="KinematicBody"]
-transform = Transform( 15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 23.7944, 0 )
-billboard = 1
-
-[node name="Viewport" type="Viewport" parent="KinematicBody/Sprite3D"]
-size = Vector2( 458, 14 )
-transparent_bg = true
-usage = 0
-render_target_v_flip = true
-
-[node name="ProgressBar" type="ProgressBar" parent="KinematicBody/Sprite3D/Viewport"]
-margin_right = 458.0
-margin_bottom = 14.0
-theme = ExtResource( 9 )
-value = 100.0
-percent_visible = false
-
 [node name="simple movement spell (holder node)" parent="." instance=ExtResource( 4 )]
+
+[node name="make a dude spell" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.262, 6.1972, 0 )
 
 [connection signal="body_entered" from="KinematicBody/Area" to="KinematicBody" method="_on_Area_body_entered"]
 [connection signal="donedashing" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_donedashing"]

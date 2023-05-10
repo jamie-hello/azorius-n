@@ -40,8 +40,8 @@ func _on_length_of_dash_timeout():
 func _on_total_cooldown_timeout():
 	cooldownready = true
 	
-func _input(event):
-	if event.is_action_pressed("use enemy spell"):
+	
+func spell_use():
 		if cooldownready:
 			cooldownready = false
 			print("im gonna use my spell!!!! first i'll wind up! im looking at the player now!")

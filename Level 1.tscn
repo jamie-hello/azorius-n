@@ -255,7 +255,7 @@ environment = SubResource( 15 )
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 21.8631, -101.402, -110.836 )
 
 [node name="ChainChomp" parent="." instance=ExtResource( 6 )]
-transform = Transform( -0.0041466, 0.00253199, 0.199941, 0.104229, 0.170694, 0, -0.170643, 0.104198, -0.00485853, 7.72449, 1.71805, 1.36346 )
+transform = Transform( -0.0041466, 0.00253199, 0.199941, 0.00494346, 0.199924, -0.00242927, -0.199896, 0.00489112, -0.00420761, 7.72449, 1.71805, 1.36346 )
 
 [node name="The Floor4" type="StaticBody" parent="."]
 transform = Transform( 0.923196, 0.384329, 0, -0.384329, 0.923196, 0, 0, 0, 1, -45.2874, 4.61522, 24.8243 )

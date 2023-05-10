@@ -2,7 +2,8 @@ extends KinematicBody
 
 
 #i need spell holders just like player. i will begin with searing exarch bourlders
-var spell1 = ""
+onready var spell1 = $"simple movement spell (holder node)"
+onready var spell2 = $"make a dude spell"
 var _velocity = Vector3.ZERO
 var speed = 0
 var hp = 5000
@@ -11,9 +12,8 @@ onready var hpprogress = $"KinematicBody/Sprite3D/Viewport/ProgressBar"
 signal sendmeplayerposition
 
 func _ready():
-	hpprogress.max_value = hp
-	hpprogress.value = hp
-	pass 
+	#enemyscriptstuff.initialized = true
+	enemyscriptstuff.initialize(hp)
 	
 func _physics_process(delta):
 	if updateplayerposition:
@@ -32,6 +32,11 @@ func _physics_process(delta):
 
 
 	
+func _input(event):
+	if event.is_action_pressed("use enemy spell1"):
+		spell1.spell_use()
+	if event.is_action_pressed("use enemy spell2"):
+		spell2.spell_use()
 
 var updateplayerposition = false
 func _on_simple_movement_spell_holder_node_winding_up():

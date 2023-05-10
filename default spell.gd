@@ -21,7 +21,6 @@ func spell_use():
 	var springarmdestx : float = ((mousePos[0] / get_viewport().size.x) - 0.5)
 	var springarmdesty : float = -((mousePos[1] / get_viewport().size.y) - 0.5)
 	var angle = Vector3(-springarmdestx,0, springarmdesty)
-	
 	newcast.initialize(damage,angle)
 	newcast.transform = self.get_global_transform()
 	
