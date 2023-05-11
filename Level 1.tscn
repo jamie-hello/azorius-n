@@ -274,3 +274,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 1, 26 )
 
 [connection signal="sendmyposition" from="Player" to="ChainChomp" method="_on_Player_sendmyposition"]
 [connection signal="sendmeplayerposition" from="ChainChomp" to="Player" method="_on_ChainChomp_sendmeplayerposition"]
+[connection signal="makingaguy" from="ChainChomp/make a dude spell" to="Player" method="_on_make_a_dude_spell_makingaguy"]
+
+[editable path="ChainChomp"]
+[editable path="ChainChomp/make a dude spell"]

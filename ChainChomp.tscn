@@ -119,3 +119,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.262, 6.1972, 0 )
 [connection signal="startdashing" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_startdashing"]
 [connection signal="waitingtodash" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_waitingtodash"]
 [connection signal="winding_up" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_winding_up"]
+
+[editable path="make a dude spell"]

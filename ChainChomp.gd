@@ -14,6 +14,7 @@ signal sendmeplayerposition
 func _ready():
 	#enemyscriptstuff.initialized = true
 	enemyscriptstuff.initialize(hp)
+	enemyscriptstuff.boss = true
 	
 func _physics_process(delta):
 	if updateplayerposition:

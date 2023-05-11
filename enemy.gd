@@ -15,15 +15,18 @@ var hp = 100
 var normalcolor = [255,38,175]
 var damagedcolor = [255,0,0]
 onready var initialized = false
+onready var boss = false
 onready var damagetakencolortimer = $damagetakencolortimer
 var damagetakencolortimerwaittime = 0.278
+var speed = 6
+var targetplayertranslation = Vector3.UP
+var _velocity = Vector3.ZERO
+var updateplayerposition = false
 #onready var color = $"MeshInstance".material_override.albedo_color
 
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 	
 func initialize(hp):
 	initialized = true
@@ -49,22 +52,30 @@ func initialize(hp):
 	hpviewport.add_child(hpprogress)
 	areafordamage = Area.new()
 	var collisionshape = CollisionShape.new()
+	updateplayerposition = true
 	
 	
 	
 func _process(delta):
 	if initialized:
 		hpsprite.set_texture(hpviewport.get_texture())
+signal sendmeplayerposition
+func _physics_process(delta):
+	if !boss:
+		_velocity = -(self.translation - targetplayertranslation)
+		_velocity.y = 0
+		_velocity = _velocity.normalized() * speed
+		move_and_slide(_velocity,Vector3.UP)
+		if updateplayerposition:
+			emit_signal("sendmeplayerposition")
+			#self.look_at(targetplayertranslation,Vector3.UP)
+
+func _on_Player_sendmyposition(translation):
+	targetplayertranslation = translation
+	
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-"""
-func _process(delta):
-	#color
-	normalcolor[0] - 
-	var fractionoftimer = 1 - (damagetakencolortimer.get_time_left() / damagetakencolortimerwaittime) as float
-	color = color.color8(normalcolor[0] - )
-"""
+
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("damaging"):
@@ -75,4 +86,3 @@ func _on_Area_body_entered(body):
 #	damagetakencolortimer.start
 	
 	
-	pass # Replace with function body.

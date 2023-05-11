@@ -148,4 +148,12 @@ signal sendmyposition
 func _on_ChainChomp_sendmeplayerposition():
 	#for chainchomp looking and dashing toward the player
 	emit_signal("sendmyposition",self.get_translation())
-	pass # Replace with function body.
+
+
+
+
+
+
+func _on_make_a_dude_spell_makingaguy(guy):
+	connect("sendmyposition",guy,"_on_Player_sendmyposition")
+	guy.connect("sendmeplayerposition",self,"_on_ChainChomp_sendmeplayerposition")
