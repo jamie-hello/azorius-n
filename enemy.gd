@@ -16,8 +16,6 @@ var normalcolor = [255,38,175]
 var damagedcolor = [255,0,0]
 onready var initialized = false
 onready var boss = false
-onready var damagetakencolortimer = $damagetakencolortimer
-var damagetakencolortimerwaittime = 0.278
 var speed = 6
 var targetplayertranslation = Vector3.UP
 var _velocity = Vector3.ZERO
@@ -63,7 +61,7 @@ signal sendmeplayerposition
 func _physics_process(delta):
 	if !boss:
 		_velocity = -(self.translation - targetplayertranslation)
-		_velocity.y = 0
+		_velocity.y = -10
 		_velocity = _velocity.normalized() * speed
 		move_and_slide(_velocity,Vector3.UP)
 		if updateplayerposition:
@@ -82,6 +80,8 @@ func _on_Area_body_entered(body):
 		hpprogress.value -= body._damage
 		print("ive been hit! my hitpoints value is now ",hpprogress.value)
 		body.queue_free()
+		if hpprogress.value <= 0:
+			queue_free()
 		
 #	damagetakencolortimer.start
 	
