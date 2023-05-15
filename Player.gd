@@ -8,7 +8,8 @@ var speed = 10
 var basespeed = 10
 var _velocity = Vector3.ZERO
 var cameraheight = 30
-var input_interrupted = false #if a monster pushed you back or if you are dashing
+var hp = 3
+var input_interrupted = true #if a monster pushed you back or if you are dashing. set to true by default for _on_spawn_timer_timeout()
 onready var vortexpivot = preload("res://vortexpivot.tscn")
 onready var cameraArms_xz : SpringArm = $"CameraArms/SpringArm leftright"
 onready var cameraArms_y = $"CameraArms/SpringArm leftright/SpringArm updown"
@@ -22,7 +23,9 @@ onready var fps_label = $fps_label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#Engine.time_scale = 1
+	$"spawn timer".start(1.9)
+	$Control.ready()
+	$thumbsdown.visible = false
 	pass
 
 func _process(delta) -> void:
@@ -36,6 +39,7 @@ func _process(delta) -> void:
 		_velocity.x = (Input.get_action_strength("left") - Input.get_action_raw_strength("right")) 
 		_velocity.z = (Input.get_action_strength("up") - Input.get_action_raw_strength("down")) 
 	_velocity = _velocity.normalized() * speed
+	
 	_velocity.y = -14
 	#move_and_slide(_velocity, Vector3.UP,true)
 	#move_and_slide_with_snap(_velocity,Vector3.DOWN,Vector3.UP,true)
@@ -157,3 +161,35 @@ func _on_ChainChomp_sendmeplayerposition():
 func _on_make_a_dude_spell_makingaguy(guy):
 	connect("sendmyposition",guy,"_on_Player_sendmyposition")
 	guy.connect("sendmeplayerposition",self,"_on_ChainChomp_sendmeplayerposition")
+
+
+func _on_spawn_timer_timeout():
+	input_interrupted = false
+	$Control.go()
+
+
+func _on_ChainChomp_youwin():
+	$Control.youwin()
+	pass # Replace with function body.
+
+
+
+
+func _on_layer3_collision_enemy_damaging_spells_area_entered(area):
+	print("player detected a hit maybe")
+	if area.is_in_group("damaging"):
+		$thumbsdown.visible = true
+		$thumbsdown/thumbsdowntimer.start(1)
+		print("it was a hit")
+		hp -= area._damage
+		print("player has been hit! my hitpoints value is now ",hp)
+		area.deactivate()
+		if hp <= 0:
+			$Control.youlose()
+			input_interrupted=true
+			
+
+
+
+func _on_thumbsdowntimer_timeout():
+	$thumbsdown.visible = false

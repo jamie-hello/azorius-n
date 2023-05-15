@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Camera.tscn" type="PackedScene" id=2]
@@ -7,17 +7,20 @@
 [ext_resource path="res://towerRound_sampleE.glb" type="PackedScene" id=5]
 [ext_resource path="res://frozenorb.tscn" type="PackedScene" id=6]
 [ext_resource path="res://vortex.tscn" type="PackedScene" id=7]
-
-[sub_resource type="CapsuleShape" id=1]
-radius = 0.784926
-height = 1.9032
+[ext_resource path="res://ready.png" type="Texture" id=8]
+[ext_resource path="res://go.png" type="Texture" id=9]
+[ext_resource path="res://playerreadygo.gd" type="Script" id=10]
+[ext_resource path="res://youwin.jpg" type="Texture" id=11]
+[ext_resource path="res://youlose.png" type="Texture" id=12]
+[ext_resource path="res://playercapsule.tres" type="Shape" id=13]
+[ext_resource path="res://thumbs down.png" type="Texture" id=14]
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.9573, 0 )
-shape = SubResource( 1 )
+shape = ExtResource( 13 )
 
 [node name="CameraArms" parent="." instance=ExtResource( 2 )]
 
@@ -40,13 +43,54 @@ collision_mask = 0
 visible = false
 
 [node name="fps_label" type="Label" parent="."]
+visible = false
 margin_left = 12.0
 margin_top = 17.0
 margin_right = 133.0
 margin_bottom = 121.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="spawn timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 10 )
+
+[node name="ready" type="Sprite" parent="Control"]
+position = Vector2( 560, 313 )
+texture = ExtResource( 8 )
+
+[node name="go" type="Sprite" parent="Control"]
+position = Vector2( 516, 307 )
+texture = ExtResource( 9 )
+
+[node name="Timer" type="Timer" parent="Control"]
+wait_time = 0.25
+
+[node name="youlose" type="Sprite" parent="Control"]
+position = Vector2( 542, 293 )
+texture = ExtResource( 12 )
+
+[node name="youwin" type="Sprite" parent="Control"]
+position = Vector2( 545, 290 )
+texture = ExtResource( 11 )
+
+[node name="layer3 collision (enemy damaging spells)" type="Area" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="layer3 collision (enemy damaging spells)"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.957, 0 )
+shape = ExtResource( 13 )
+
+[node name="thumbsdown" type="Sprite3D" parent="."]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 3.36737, 0 )
+billboard = 1
+texture = ExtResource( 14 )
+
+[node name="thumbsdowntimer" type="Timer" parent="thumbsdown"]
 
 [connection signal="dashing" from="charged bolt" to="." method="_on_charged_bolt_dashing"]
 [connection signal="enddashing" from="charged bolt" to="." method="_on_charged_bolt_enddashing"]
@@ -57,3 +101,9 @@ __meta__ = {
 [connection signal="vortexendinputoverride" from="vortex" to="." method="_on_vortex_vortexendinputoverride"]
 [connection signal="vortexinputoverride" from="vortex" to="." method="_on_vortex_vortexinputoverride"]
 [connection signal="vortexpretimer" from="vortex" to="." method="_on_vortex_vortexpretimer"]
+[connection signal="timeout" from="spawn timer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Control/Timer" to="Control" method="_on_Timer_timeout"]
+[connection signal="area_entered" from="layer3 collision (enemy damaging spells)" to="." method="_on_layer3_collision_enemy_damaging_spells_area_entered"]
+[connection signal="body_entered" from="layer3 collision (enemy damaging spells)" to="." method="_on_layer3_collision_enemy_damaging_spells_body_entered"]
+[connection signal="body_entered" from="layer3 collision (enemy damaging spells)" to="." method="_on_Area_body_entered"]
+[connection signal="timeout" from="thumbsdown/thumbsdowntimer" to="." method="_on_thumbsdowntimer_timeout"]

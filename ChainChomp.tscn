@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Nintendo 64 - Super Mario 64 - Chain Chomp/VMtl037.material" type="Material" id=1]
 [ext_resource path="res://enemy.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Nintendo 64 - Super Mario 64 - Chain Chomp/VMtl038.material" type="Material" id=6]
 [ext_resource path="res://Nintendo 64 - Super Mario 64 - Chain Chomp/VMtl036.material" type="Material" id=7]
 [ext_resource path="res://Nintendo 64 - Super Mario 64 - Chain Chomp/VMtl040.material" type="Material" id=8]
+[ext_resource path="res://bitehurtbox.gd" type="Script" id=9]
 [ext_resource path="res://make a dude spell.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ArrayMesh" id=1]
@@ -80,17 +81,15 @@ surfaces/4 = {
 [sub_resource type="SphereShape" id=2]
 radius = 22.74
 
+[sub_resource type="SphereShape" id=3]
+radius = 14.913
+
 [node name="ChainChomp" type="KinematicBody"]
 script = ExtResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = null
-material/1 = null
-material/2 = null
-material/3 = null
-material/4 = null
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
 script = ExtResource( 2 )
@@ -98,7 +97,7 @@ script = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 shape = SubResource( 2 )
 
-[node name="Area" type="Area" parent="KinematicBody"]
+[node name="Area" type="Area" parent="KinematicBody" groups=["damaging"]]
 transform = Transform( 1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0 )
 collision_layer = 2
 collision_mask = 2
@@ -114,10 +113,24 @@ wait_time = 0.278
 [node name="make a dude spell" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.262, 6.1972, 0 )
 
+[node name="simple ai script timer" type="Timer" parent="."]
+
+[node name="bite charge" type="Area" parent="." groups=["damaging"]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.652872 )
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 9 )
+
+[node name="CollisionShape" type="CollisionShape" parent="bite charge"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.9943 )
+shape = SubResource( 3 )
+
+[connection signal="tree_exited" from="KinematicBody" to="." method="_on_KinematicBody_tree_exited"]
 [connection signal="body_entered" from="KinematicBody/Area" to="KinematicBody" method="_on_Area_body_entered"]
 [connection signal="donedashing" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_donedashing"]
 [connection signal="startdashing" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_startdashing"]
 [connection signal="waitingtodash" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_waitingtodash"]
 [connection signal="winding_up" from="simple movement spell (holder node)" to="." method="_on_simple_movement_spell_holder_node_winding_up"]
+[connection signal="timeout" from="simple ai script timer" to="." method="_on_simple_ai_script_timer_timeout"]
 
 [editable path="make a dude spell"]

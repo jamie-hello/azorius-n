@@ -4,9 +4,10 @@ extends KinematicBody
 #i need spell holders just like player. i will begin with searing exarch bourlders
 onready var spell1 = $"simple movement spell (holder node)"
 onready var spell2 = $"make a dude spell"
+onready var simplescripttimer = $"simple ai script timer"
 var _velocity = Vector3.ZERO
 var speed = 0
-var hp = 5000
+var hp = 500
 onready var enemyscriptstuff = $"KinematicBody"
 #onready var hpprogress = $"KinematicBody/Sprite3D/Viewport/ProgressBar"
 signal sendmeplayerposition
@@ -15,6 +16,7 @@ func _ready():
 	#enemyscriptstuff.initialized = true
 	enemyscriptstuff.initialize(hp)
 	enemyscriptstuff.boss = true
+	simplescripttimer.start(3.5)
 	
 func _physics_process(delta):
 	if updateplayerposition:
@@ -33,11 +35,11 @@ func _physics_process(delta):
 
 
 	
-func _input(event):
+"""func _input(event):
 	if event.is_action_pressed("use enemy spell1"):
 		spell1.spell_use()
 	if event.is_action_pressed("use enemy spell2"):
-		spell2.spell_use()
+		spell2.spell_use()"""
 
 var updateplayerposition = false
 func _on_simple_movement_spell_holder_node_winding_up():
@@ -48,11 +50,13 @@ func _on_simple_movement_spell_holder_node_winding_up():
 func _on_simple_movement_spell_holder_node_startdashing():
 	#dash fast toward the player, and hit the player too
 	speed = 70
+	$"bite charge".activate()
 
 
 func _on_simple_movement_spell_holder_node_donedashing():
 	#stop moving
 	speed = 0
+	$"bite charge".deactivate()
 
 var targetplayertranslation = Vector3.ZERO
 var charge_targetposition = Vector3.ZERO
@@ -66,3 +70,22 @@ func _on_simple_movement_spell_holder_node_waitingtodash():
 	charge_targetposition.y = 0
 	charge_targetposition = charge_targetposition.normalized()
 	print(charge_targetposition)
+
+var simpleaiscript_count = 0
+func _on_simple_ai_script_timer_timeout():
+	simpleaiscript_count +=1
+	if simpleaiscript_count%2 == 0:
+		spell1.spell_use()
+		simplescripttimer.start(3.1)
+	else:
+		spell2.spell_use()
+		simplescripttimer.start(2.1)
+	
+	
+	
+
+signal youwin
+func _on_KinematicBody_tree_exited():
+	simplescripttimer.stop()
+	emit_signal("youwin")
+	queue_free()
