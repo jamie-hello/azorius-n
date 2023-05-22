@@ -17,7 +17,7 @@ onready var camera = $"CameraArms/SpringArm leftright/SpringArm updown/Camera"
 onready var spell = $"charged bolt"
 #onready var spell2 = $"default spell"
 onready var spell2 = $"frozenorb"
-#onready var spell3 = $"vortex"
+onready var spell3 = $"default spell"
 onready var fps_label = $fps_label
 
 
@@ -72,7 +72,7 @@ func _input(event):
 		elif event.is_action_pressed("use spell 2"):
 			spell2.spell_use()
 		elif event.is_action_pressed("use spell 3"):
-			#spell3.spell_use()
+			spell3.spell_use()
 			pass
 		elif event.is_action_pressed("ui_cancel"):
 			get_tree().quit()

@@ -6,6 +6,7 @@ onready var spell1 = $"simple movement spell (holder node)"
 onready var spell2 = $"make a dude spell"
 onready var simplescripttimer = $"simple ai script timer"
 var _velocity = Vector3.ZERO
+var wigglebias = Vector3.ZERO
 var speed = 0
 var hp = 500
 onready var enemyscriptstuff = $"KinematicBody"
@@ -24,6 +25,15 @@ func _physics_process(delta):
 		self.look_at(targetplayertranslation,Vector3.UP)
 	_velocity = charge_targetposition * speed
 	move_and_slide(_velocity,Vector3.UP)
+	if wiggling:
+		wigglebias = $"MeshInstance".get_translation() / -6
+		$"MeshInstance".set_translation($"MeshInstance".get_translation()+
+			Vector3(
+				($"MeshInstance/wiggletimer".time_left * rand_range(-10,10))+wigglebias.x,
+				($"MeshInstance/wiggletimer".time_left * rand_range(-10,10))+wigglebias.y,
+				($"MeshInstance/wiggletimer".time_left * rand_range(-10,10))+wigglebias.z
+			)
+		)
 	
 	
 	
@@ -89,3 +99,12 @@ func _on_KinematicBody_tree_exited():
 	simplescripttimer.stop()
 	emit_signal("youwin")
 	queue_free()
+
+var wiggling = false
+func _on_KinematicBody_wiggle():
+	wiggling = true
+	$"MeshInstance/wiggletimer".start(1)
+func _on_wiggletimer_timeout():
+	$"MeshInstance".set_translation(Vector3.ZERO)
+	wigglebias = Vector3.ZERO
+	wiggling = false

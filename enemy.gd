@@ -72,14 +72,17 @@ func _on_Player_sendmyposition(translation):
 	targetplayertranslation = translation
 	
 
-
-
+signal wiggle
+func wiggle():
+	emit_signal("wiggle")
+	pass
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("damaging"):
 		hpprogress.value -= body._damage
 		print("ive been hit! my hitpoints value is now ",hpprogress.value)
 		body.queue_free()
+		wiggle()
 		if hpprogress.value <= 0:
 			queue_free()
 		
