@@ -26,12 +26,13 @@ func _physics_process(delta):
 	_velocity = charge_targetposition * speed
 	move_and_slide(_velocity,Vector3.UP)
 	if wiggling:
+		wigglingdamage = wigglingdamage * $"MeshInstance/wiggletimer".time_left 
 		wigglebias = $"MeshInstance".get_translation() / -6
 		$"MeshInstance".set_translation($"MeshInstance".get_translation()+
 			Vector3(
-				($"MeshInstance/wiggletimer".time_left * rand_range(-10,10))+wigglebias.x,
-				($"MeshInstance/wiggletimer".time_left * rand_range(-10,10))+wigglebias.y,
-				($"MeshInstance/wiggletimer".time_left * rand_range(-10,10))+wigglebias.z
+				( rand_range(-wigglingdamage,wigglingdamage))+wigglebias.x,
+				( rand_range(-wigglingdamage*3/8,wigglingdamage*3/8))+wigglebias.y,
+				( rand_range(-wigglingdamage,wigglingdamage))+wigglebias.z
 			)
 		)
 	
@@ -101,10 +102,14 @@ func _on_KinematicBody_tree_exited():
 	queue_free()
 
 var wiggling = false
-func _on_KinematicBody_wiggle():
+var wigglingdamage = 0
+func _on_KinematicBody_wiggle(damage):
 	wiggling = true
-	$"MeshInstance/wiggletimer".start(1)
+	if wigglingdamage <= damage:
+		wigglingdamage = damage
+		$"MeshInstance/wiggletimer".start(1.1)
 func _on_wiggletimer_timeout():
+	wigglingdamage = 0
 	$"MeshInstance".set_translation(Vector3.ZERO)
 	wigglebias = Vector3.ZERO
 	wiggling = false

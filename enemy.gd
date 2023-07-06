@@ -61,8 +61,8 @@ signal sendmeplayerposition
 func _physics_process(delta):
 	if !boss:
 		_velocity = -(self.translation - targetplayertranslation)
-		_velocity.y = -10
 		_velocity = _velocity.normalized() * speed
+		_velocity.y = -10
 		move_and_slide(_velocity,Vector3.UP)
 		if updateplayerposition:
 			emit_signal("sendmeplayerposition")
@@ -73,16 +73,16 @@ func _on_Player_sendmyposition(translation):
 	
 
 signal wiggle
-func wiggle():
-	emit_signal("wiggle")
+func wiggle(dmg):
+	emit_signal("wiggle",dmg)
 	pass
 
 func _on_Area_body_entered(body):
 	if body.is_in_group("damaging"):
 		hpprogress.value -= body._damage
 		print("ive been hit! my hitpoints value is now ",hpprogress.value)
+		wiggle(body._damage)
 		body.queue_free()
-		wiggle()
 		if hpprogress.value <= 0:
 			queue_free()
 		

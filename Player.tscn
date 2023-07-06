@@ -104,6 +104,6 @@ texture = ExtResource( 14 )
 [connection signal="timeout" from="spawn timer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Control/Timer" to="Control" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="layer3 collision (enemy damaging spells)" to="." method="_on_layer3_collision_enemy_damaging_spells_area_entered"]
-[connection signal="body_entered" from="layer3 collision (enemy damaging spells)" to="." method="_on_layer3_collision_enemy_damaging_spells_body_entered"]
 [connection signal="body_entered" from="layer3 collision (enemy damaging spells)" to="." method="_on_Area_body_entered"]
+[connection signal="body_entered" from="layer3 collision (enemy damaging spells)" to="." method="_on_layer3_collision_enemy_damaging_spells_body_entered"]
 [connection signal="timeout" from="thumbsdown/thumbsdowntimer" to="." method="_on_thumbsdowntimer_timeout"]
